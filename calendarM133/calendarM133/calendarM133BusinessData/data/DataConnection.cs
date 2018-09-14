@@ -56,6 +56,7 @@ namespace calendarM133BusinessData
             MySqlConnection mySqlConnection = new MySqlConnection();
             mySqlConnection.ConnectionString = "server=localhost;user id=root;persistsecurityinfo=True;database=dbTermin;port=3306;logging=True;allowuservariables=True";
             MySqlCommand cmd = mySqlConnection.CreateCommand();
+            //cmd.CommandText = "INSERT INTO tbtermin (`terminId`, `terminSubject`, `StartDate`, `EndDate`) VALUES (NULL, " + subject + "," + startdate +"," + endDate +")";
             cmd.CommandText = "INSERT INTO tbtermin (`terminId`, `terminSubject`, `StartDate`, `EndDate`) VALUES (NULL, @subject, @startDate, @EndDate)";
             cmd.Parameters.AddWithValue("@subject", subject);
             cmd.Parameters.AddWithValue("@startDate", startdate);
