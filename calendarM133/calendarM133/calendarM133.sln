@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27130.2024
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "calendarM133", "calendarM133\calendarM133.csproj", "{BE87A4D0-5EDE-4F09-9A2C-73E3F2D0DF88}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "calendarM133BusinessData", "calendarM133BusinessData\calendarM133BusinessData.csproj", "{A0C57463-2E89-407F-B75F-16F340D58445}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BE87A4D0-5EDE-4F09-9A2C-73E3F2D0DF88}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BE87A4D0-5EDE-4F09-9A2C-73E3F2D0DF88}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BE87A4D0-5EDE-4F09-9A2C-73E3F2D0DF88}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BE87A4D0-5EDE-4F09-9A2C-73E3F2D0DF88}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A0C57463-2E89-407F-B75F-16F340D58445}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A0C57463-2E89-407F-B75F-16F340D58445}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A0C57463-2E89-407F-B75F-16F340D58445}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A0C57463-2E89-407F-B75F-16F340D58445}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D782458A-9672-4F94-A1DC-CCAF4CAF0A6E}
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,10 @@
+C:\Users\brian\source\repos\calendarM133\calendarM133Datalayer\bin\Debug\netcoreapp2.0\calendarM133BusinessAndData.deps.json
+C:\Users\brian\source\repos\calendarM133\calendarM133Datalayer\bin\Debug\netcoreapp2.0\calendarM133BusinessAndData.runtimeconfig.json
+C:\Users\brian\source\repos\calendarM133\calendarM133Datalayer\bin\Debug\netcoreapp2.0\calendarM133BusinessAndData.runtimeconfig.dev.json
+C:\Users\brian\source\repos\calendarM133\calendarM133Datalayer\bin\Debug\netcoreapp2.0\calendarM133BusinessAndData.dll
+C:\Users\brian\source\repos\calendarM133\calendarM133Datalayer\bin\Debug\netcoreapp2.0\calendarM133BusinessAndData.pdb
+C:\Users\brian\source\repos\calendarM133\calendarM133Datalayer\obj\Debug\netcoreapp2.0\calendarM133BusinessAndData.csproj.CoreCompileInputs.cache
+C:\Users\brian\source\repos\calendarM133\calendarM133Datalayer\obj\Debug\netcoreapp2.0\calendarM133BusinessAndData.AssemblyInfoInputs.cache
+C:\Users\brian\source\repos\calendarM133\calendarM133Datalayer\obj\Debug\netcoreapp2.0\calendarM133BusinessAndData.AssemblyInfo.cs
+C:\Users\brian\source\repos\calendarM133\calendarM133Datalayer\obj\Debug\netcoreapp2.0\calendarM133BusinessAndData.dll
+C:\Users\brian\source\repos\calendarM133\calendarM133Datalayer\obj\Debug\netcoreapp2.0\calendarM133BusinessAndData.pdb
