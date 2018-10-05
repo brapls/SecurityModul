@@ -11,7 +11,7 @@ namespace calendarM133
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            CalendarLogger.addLog("New login");
         }
 
         protected void butLogin_Click(object sender, EventArgs e)
