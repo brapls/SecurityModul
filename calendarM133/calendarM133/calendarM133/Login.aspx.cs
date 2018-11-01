@@ -18,12 +18,11 @@ namespace calendarM133
             if (UserBusiness.UserLoggin(tbUsername.Text, tbPassword.Text))
             {
                 Response.Redirect("~/Default.aspx");
-                Logger.Error("Falsches Passwort");
             }
             else
             {
                 lblInvalidPassword.Visible = true;
-                Logger.Debug("Falsches Passwort");
+                Logger.Error("Falsches Passwort für den Account mit dem Username:" + tbUsername.Text);
             }
         }
 
