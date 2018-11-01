@@ -39,7 +39,6 @@ namespace calendarM133
                 Response.Redirect("~/Login.aspx", true);
             }
             lblErrors.Text = error;
-            if (!string.IsNullOrWhiteSpace(error)) Logger.Error(error);
         }
 
         protected void butLogin_Click(object sender, EventArgs e)
