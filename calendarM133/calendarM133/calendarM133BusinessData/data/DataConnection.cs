@@ -20,10 +20,18 @@ namespace calendarM133BusinessData
         {
             MySqlConnection mySqlConnection = new MySqlConnection();
             mySqlConnection.ConnectionString = "server=localhost;user id=root;persistsecurityinfo=True;database=dbTermin;port=3306;logging=True;allowuservariables=True";
-            MySqlCommand cmd = mySqlConnection.CreateCommand();
+            /*MySqlCommand cmd = mySqlConnection.CreateCommand();
             cmd.CommandText = "Select userId from tbUser where username=@username && password=@password";
             cmd.Parameters.AddWithValue("@username", username);
-            cmd.Parameters.AddWithValue("@password", password);
+            cmd.Parameters.AddWithValue("@password", password);*/
+            MySqlCommand cmd = mySqlConnection.CreateCommand();
+            cmd.CommandText = "spgetidbyusernamepw";
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("usernameParameter", username);
+            cmd.Parameters["usernameParameter"].Direction = ParameterDirection.Input;
+            cmd.Parameters.AddWithValue("passwordParameter", password);
+            cmd.Parameters["passwordParameter"].Direction = ParameterDirection.Input;
+
             mySqlConnection.Open();
             MySqlDataReader reader = cmd.ExecuteReader();
             DataSet ds = new DataSet();
@@ -56,6 +64,7 @@ namespace calendarM133BusinessData
             MySqlConnection mySqlConnection = new MySqlConnection();
             mySqlConnection.ConnectionString = "server=localhost;user id=root;persistsecurityinfo=True;database=dbTermin;port=3306;logging=True;allowuservariables=True";
             MySqlCommand cmd = mySqlConnection.CreateCommand();
+            //cmd.CommandText = "INSERT INTO tbtermin (`terminId`, `terminSubject`, `StartDate`, `EndDate`) VALUES (NULL, " + subject + "," + startdate +"," + endDate +")";
             cmd.CommandText = "INSERT INTO tbtermin (`terminId`, `terminSubject`, `StartDate`, `EndDate`) VALUES (NULL, @subject, @startDate, @EndDate)";
             cmd.Parameters.AddWithValue("@subject", subject);
             cmd.Parameters.AddWithValue("@startDate", startdate);
@@ -88,7 +97,8 @@ namespace calendarM133BusinessData
         /// gets all termin of the user logged in
         /// </summary>
         /// <returns></returns>
-        internal static List<Termin> AllTerminOfCurrentUserAsList(){
+        internal static List<Termin> AllTerminOfCurrentUserAsList()
+        {
             if (HttpContext.Current.Session["id"] == null)
             {
                 return new List<Termin>();
@@ -109,7 +119,7 @@ namespace calendarM133BusinessData
             if (dataTable.Rows.Count == 0)
                 return new List<Termin>();
             String s = "Select * From tbTermin where ";
-            foreach(DataRow dr in dataTable.Rows)
+            foreach (DataRow dr in dataTable.Rows)
             {
                 s += "terminId = " + dr["terminId"] + " || ";
             }
@@ -129,11 +139,11 @@ namespace calendarM133BusinessData
             foreach (DataRow dr in dataTable2.Rows)
             {
                 //try {
-                    Termin t = new Termin();
-                    t.id = int.Parse(dr["terminId"].ToString());
-                    t.subject = dr["terminSubject"].ToString();
-                    t.starTime = DateTime.Parse(dr["StartDate"].ToString());
-                    t.endTime = DateTime.Parse(dr["EndDate"].ToString());
+                Termin t = new Termin();
+                t.id = int.Parse(dr["terminId"].ToString());
+                t.subject = dr["terminSubject"].ToString();
+                t.starTime = DateTime.Parse(dr["StartDate"].ToString());
+                t.endTime = DateTime.Parse(dr["EndDate"].ToString());
                 allTermin.Add(t);
                 //}
                 //catch(Exception ex){

@@ -17,3 +17,13 @@ C:\Users\brian\Downloads\calendarM133\calendarM133\calendarM133BusinessData\obj\
 C:\Users\brian\Downloads\calendarM133\calendarM133\calendarM133BusinessData\obj\Debug\calendarM133BusinessData.csproj.CopyComplete
 C:\Users\brian\Downloads\calendarM133\calendarM133\calendarM133BusinessData\obj\Debug\calendarM133BusinessData.exe
 C:\Users\brian\Downloads\calendarM133\calendarM133\calendarM133BusinessData\obj\Debug\calendarM133BusinessData.pdb
+C:\Users\brian\Desktop\M151-web-sql\calendarM133\calendarM133\calendarM133BusinessData\bin\Debug\calendarM133BusinessData.exe.config
+C:\Users\brian\Desktop\M151-web-sql\calendarM133\calendarM133\calendarM133BusinessData\bin\Debug\calendarM133BusinessData.exe
+C:\Users\brian\Desktop\M151-web-sql\calendarM133\calendarM133\calendarM133BusinessData\bin\Debug\calendarM133BusinessData.pdb
+C:\Users\brian\Desktop\M151-web-sql\calendarM133\calendarM133\calendarM133BusinessData\bin\Debug\MySql.Data.dll
+C:\Users\brian\Desktop\M151-web-sql\calendarM133\calendarM133\calendarM133BusinessData\bin\Debug\MySql.Data.xml
+C:\Users\brian\Desktop\M151-web-sql\calendarM133\calendarM133\calendarM133BusinessData\obj\Debug\calendarM133BusinessData.csprojAssemblyReference.cache
+C:\Users\brian\Desktop\M151-web-sql\calendarM133\calendarM133\calendarM133BusinessData\obj\Debug\calendarM133BusinessData.csproj.CoreCompileInputs.cache
+C:\Users\brian\Desktop\M151-web-sql\calendarM133\calendarM133\calendarM133BusinessData\obj\Debug\calendarM133BusinessData.csproj.CopyComplete
+C:\Users\brian\Desktop\M151-web-sql\calendarM133\calendarM133\calendarM133BusinessData\obj\Debug\calendarM133BusinessData.exe
+C:\Users\brian\Desktop\M151-web-sql\calendarM133\calendarM133\calendarM133BusinessData\obj\Debug\calendarM133BusinessData.pdb
