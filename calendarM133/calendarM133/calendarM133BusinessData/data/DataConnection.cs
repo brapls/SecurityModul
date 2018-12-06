@@ -20,20 +20,13 @@ namespace calendarM133BusinessData
         {
             MySqlConnection mySqlConnection = new MySqlConnection();
             mySqlConnection.ConnectionString = "server=localhost;user id=root;persistsecurityinfo=True;database=dbTermin;port=3306;logging=True;allowuservariables=True";
-            /*MySqlCommand cmd = mySqlConnection.CreateCommand();
-            cmd.CommandText = "Select userId from tbUser where username=@username && password=@password";
-            cmd.Parameters.AddWithValue("@username", username);
-            cmd.Parameters.AddWithValue("@password", password);*/
             MySqlCommand cmd = mySqlConnection.CreateCommand();
-            cmd.CommandText = "spgetidbyusernamepw";
-            cmd.CommandType = CommandType.StoredProcedure;
-            cmd.Parameters.AddWithValue("usernameParameter", username);
-            cmd.Parameters["usernameParameter"].Direction = ParameterDirection.Input;
-            cmd.Parameters.AddWithValue("passwordParameter", password);
-            cmd.Parameters["passwordParameter"].Direction = ParameterDirection.Input;
-
+            cmd.CommandText = "call spgetidbyusernamepw(@username, @password)";
+            cmd.Parameters.AddWithValue("@username", username);
+            cmd.Parameters.AddWithValue("@password", password);
+            
             mySqlConnection.Open();
-            MySqlDataReader reader = cmd.ExecuteReader();
+            MySqlDataReader reader = cmd.ExecuteReader(CommandBehavior.CloseConnection);
             DataSet ds = new DataSet();
             DataTable dataTable = new DataTable();
             ds.Tables.Add(dataTable);
@@ -52,7 +45,7 @@ namespace calendarM133BusinessData
             MySqlConnection mySqlConnection = new MySqlConnection();
             mySqlConnection.ConnectionString = "server=localhost;user id=root;persistsecurityinfo=True;database=dbTermin;port=3306;logging=True;allowuservariables=True";
             MySqlCommand cmd = mySqlConnection.CreateCommand();
-            cmd.CommandText = "INSERT INTO tbuser (userId, username, password) VALUES (NULL, @username, @password)";
+            cmd.CommandText = "call spInsertUser(@username, @password)";
             cmd.Parameters.AddWithValue("@username", username);
             cmd.Parameters.AddWithValue("@password", password);
             mySqlConnection.Open();
@@ -64,17 +57,38 @@ namespace calendarM133BusinessData
             MySqlConnection mySqlConnection = new MySqlConnection();
             mySqlConnection.ConnectionString = "server=localhost;user id=root;persistsecurityinfo=True;database=dbTermin;port=3306;logging=True;allowuservariables=True";
             MySqlCommand cmd = mySqlConnection.CreateCommand();
-            //cmd.CommandText = "INSERT INTO tbtermin (`terminId`, `terminSubject`, `StartDate`, `EndDate`) VALUES (NULL, " + subject + "," + startdate +"," + endDate +")";
-            cmd.CommandText = "INSERT INTO tbtermin (`terminId`, `terminSubject`, `StartDate`, `EndDate`) VALUES (NULL, @subject, @startDate, @EndDate)";
+            cmd.CommandText = "call spInsertTermin(@subject, @startDate, @EndDate)";
             cmd.Parameters.AddWithValue("@subject", subject);
             cmd.Parameters.AddWithValue("@startDate", startdate);
             cmd.Parameters.AddWithValue("@EndDate", endDate);
             mySqlConnection.Open();
             cmd.ExecuteNonQuery();
-            string terminId = cmd.LastInsertedId.ToString();
             mySqlConnection.Close();
-            AddUserToTermin(int.Parse(creatorId), int.Parse(terminId), 1);
+            AddUserToTermin(int.Parse(creatorId), GetLastTerminId(), 1);
         }
+
+        internal static int GetLastTerminId()
+        {
+            MySqlConnection mySqlConnection = new MySqlConnection();
+            mySqlConnection.ConnectionString = "server=localhost;user id=root;persistsecurityinfo=True;database=dbTermin;port=3306;logging=True;allowuservariables=True";
+            MySqlCommand cmd = mySqlConnection.CreateCommand();
+            cmd.CommandText = "call spGetLastTermin()";
+
+            mySqlConnection.Open();
+            MySqlDataReader reader = cmd.ExecuteReader(CommandBehavior.CloseConnection);
+            DataSet ds = new DataSet();
+            DataTable dataTable = new DataTable();
+            ds.Tables.Add(dataTable);
+            ds.EnforceConstraints = false;
+            dataTable.Load(reader);
+            if (dataTable.Rows.Count < 1)
+                return 0;
+            int i = int.Parse(dataTable.Rows[0][0].ToString());
+            mySqlConnection.Close();
+            reader.Close();
+            return i;
+        }
+
         /// <summary>
         /// Invite User to termin
         /// </summary>
@@ -86,7 +100,7 @@ namespace calendarM133BusinessData
             MySqlConnection mySqlConnection = new MySqlConnection();
             mySqlConnection.ConnectionString = "server=localhost;user id=root;persistsecurityinfo=True;database=dbTermin;port=3306;logging=True;allowuservariables=True";
             MySqlCommand cmd2 = mySqlConnection.CreateCommand();
-            cmd2.CommandText = "INSERT INTO tbusertermin (`userId`, `terminId`, `isAccepted`) VALUES ( @userId, @terminId, @status);";
+            cmd2.CommandText = "call spInsertUserTermin( @userId, @terminId, @status);";
             cmd2.Parameters.AddWithValue("@userId", userId);
             cmd2.Parameters.AddWithValue("@terminId", terminId);
             cmd2.Parameters.AddWithValue("@status", status);
@@ -134,21 +148,15 @@ namespace calendarM133BusinessData
             ds2.EnforceConstraints = false;
             dataTable2.Load(reader2);
             mySqlConnection.Close();
-            //SELECT * FROM tbtermin where terminId = 1 || terminId = 2
             List<Termin> allTermin = new List<Termin>();
             foreach (DataRow dr in dataTable2.Rows)
             {
-                //try {
                 Termin t = new Termin();
                 t.id = int.Parse(dr["terminId"].ToString());
                 t.subject = dr["terminSubject"].ToString();
                 t.starTime = DateTime.Parse(dr["StartDate"].ToString());
                 t.endTime = DateTime.Parse(dr["EndDate"].ToString());
                 allTermin.Add(t);
-                //}
-                //catch(Exception ex){
-                //    //todo: add errorhandler            
-                //}
             }
 
             return allTermin;
@@ -216,7 +224,7 @@ namespace calendarM133BusinessData
             MySqlConnection mySqlConnection = new MySqlConnection();
             mySqlConnection.ConnectionString = "server=localhost;user id=root;persistsecurityinfo=True;database=dbTermin;port=3306;logging=True;allowuservariables=True";
             MySqlCommand cmd = mySqlConnection.CreateCommand();
-            cmd.CommandText = "Select userId, username from tbUser";
+            cmd.CommandText = "call spGetUserIdAndUsername()";
             mySqlConnection.Open();
             MySqlDataReader reader = cmd.ExecuteReader();
             DataSet ds = new DataSet();
@@ -227,32 +235,27 @@ namespace calendarM133BusinessData
             mySqlConnection.Close();
             reader.Close();
             return dataTable;
-            //Dictionary<int, string> dictionary = new Dictionary<int, string>();
-            //foreach(DataRow dr in dataTable.Rows)
-            //{
-            //    dictionary.Add(int.Parse(dr["userId"].ToString()), dr["username"].ToString());
-            //}
-
-            //return dictionary;
         }
+
         internal static void DeleteTerminFromMiddleTable(int terminId, int userId)
         {
             MySqlConnection mySqlConnection = new MySqlConnection();
             mySqlConnection.ConnectionString = "server=localhost;user id=root;persistsecurityinfo=True;database=dbTermin;port=3306;logging=True;allowuservariables=True";
             MySqlCommand cmd2 = mySqlConnection.CreateCommand();
-            cmd2.CommandText = "DELETE FROM `tbusertermin` WHERE userId=@userid && terminId=@terminId";
+            cmd2.CommandText = "call spDeleteUserTermin(@userid, @terminId)";
             cmd2.Parameters.AddWithValue("@userId", userId);
             cmd2.Parameters.AddWithValue("@terminId", terminId);
             mySqlConnection.Open();
             cmd2.ExecuteNonQuery();
             mySqlConnection.Close();
         }
+
         internal static void AcceptTermin(int terminId, int userId)
         {
             MySqlConnection mySqlConnection = new MySqlConnection();
             mySqlConnection.ConnectionString = "server=localhost;user id=root;persistsecurityinfo=True;database=dbTermin;port=3306;logging=True;allowuservariables=True";
             MySqlCommand cmd2 = mySqlConnection.CreateCommand();
-            cmd2.CommandText = "UPDATE `tbusertermin` SET isAccepted=1 WHERE userId=@userId && terminId=@terminId";
+            cmd2.CommandText = "spUpdateUserTermin(@userId, terminId=@terminId)";
             cmd2.Parameters.AddWithValue("@userId", userId);
             cmd2.Parameters.AddWithValue("@terminId", terminId);
             mySqlConnection.Open();
