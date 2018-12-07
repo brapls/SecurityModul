@@ -41,3 +41,15 @@ D:\Projekte\SecurityModul\calendarM133\calendarM133\calendarM133BusinessData\bin
 D:\Projekte\SecurityModul\calendarM133\calendarM133\calendarM133BusinessData\bin\Debug\log4net.xml
 D:\Projekte\SecurityModul\calendarM133\calendarM133\calendarM133BusinessData\bin\Debug\MySql.Data.xml
 D:\Projekte\SecurityModul\calendarM133\calendarM133\calendarM133BusinessData\obj\Debug\calendarM133BusinessData.csproj.CopyComplete
+C:\Projects\SecurityModul\calendarM133\calendarM133\calendarM133BusinessData\obj\Debug\calendarM133BusinessData.csprojAssemblyReference.cache
+C:\Projects\SecurityModul\calendarM133\calendarM133\calendarM133BusinessData\obj\Debug\calendarM133BusinessData.csproj.CoreCompileInputs.cache
+C:\Projects\SecurityModul\calendarM133\calendarM133\calendarM133BusinessData\obj\Debug\calendarM133BusinessData.exe
+C:\Projects\SecurityModul\calendarM133\calendarM133\calendarM133BusinessData\obj\Debug\calendarM133BusinessData.pdb
+C:\Projects\SecurityModul\calendarM133\calendarM133\calendarM133BusinessData\bin\Debug\calendarM133BusinessData.exe.config
+C:\Projects\SecurityModul\calendarM133\calendarM133\calendarM133BusinessData\bin\Debug\calendarM133BusinessData.exe
+C:\Projects\SecurityModul\calendarM133\calendarM133\calendarM133BusinessData\bin\Debug\calendarM133BusinessData.pdb
+C:\Projects\SecurityModul\calendarM133\calendarM133\calendarM133BusinessData\bin\Debug\MySql.Data.dll
+C:\Projects\SecurityModul\calendarM133\calendarM133\calendarM133BusinessData\bin\Debug\MySql.Data.xml
+C:\Projects\SecurityModul\calendarM133\calendarM133\calendarM133BusinessData\obj\Debug\calendarM133BusinessData.csproj.CopyComplete
+C:\Projects\SecurityModul\calendarM133\calendarM133\calendarM133BusinessData\bin\Debug\log4net.dll
+C:\Projects\SecurityModul\calendarM133\calendarM133\calendarM133BusinessData\bin\Debug\log4net.xml
