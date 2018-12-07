@@ -120,7 +120,7 @@ namespace calendarM133BusinessData
             MySqlConnection mySqlConnection = new MySqlConnection();
             mySqlConnection.ConnectionString = "server=localhost; user id=root; persistsecurityinfo=True; database=dbTermin; port=3306; logging=True; allowuservariables=True";
             MySqlCommand cmd = mySqlConnection.CreateCommand();
-            cmd.CommandText = "Select terminId from tbusertermin where userId = @userId";
+            cmd.CommandText = "call spGetAllTerminOfUser(@userId)";
             cmd.Parameters.AddWithValue("@userId", HttpContext.Current.Session["id"]);
             mySqlConnection.Open();
             MySqlDataReader reader = cmd.ExecuteReader();
@@ -132,24 +132,8 @@ namespace calendarM133BusinessData
             mySqlConnection.Close();
             if (dataTable.Rows.Count == 0)
                 return new List<Termin>();
-            String s = "Select * From tbTermin where ";
-            foreach (DataRow dr in dataTable.Rows)
-            {
-                s += "terminId = " + dr["terminId"] + " || ";
-            }
-            s = s.Remove(s.ToCharArray().Length - 4);
-            MySqlCommand cmdTerminSelection = mySqlConnection.CreateCommand();
-            cmdTerminSelection.CommandText = s;
-            mySqlConnection.Open();
-            DataTable dataTable2 = new DataTable();
-            MySqlDataReader reader2 = cmdTerminSelection.ExecuteReader();
-            DataSet ds2 = new DataSet();
-            ds2.Tables.Add(dataTable2);
-            ds2.EnforceConstraints = false;
-            dataTable2.Load(reader2);
-            mySqlConnection.Close();
             List<Termin> allTermin = new List<Termin>();
-            foreach (DataRow dr in dataTable2.Rows)
+            foreach (DataRow dr in dataTable.Rows)
             {
                 Termin t = new Termin();
                 t.id = int.Parse(dr["terminId"].ToString());
@@ -171,7 +155,7 @@ namespace calendarM133BusinessData
             MySqlConnection mySqlConnection = new MySqlConnection();
             mySqlConnection.ConnectionString = "server=localhost; user id=root; persistsecurityinfo=True; database=dbTermin; port=3306; logging=True; allowuservariables=True";
             MySqlCommand cmd = mySqlConnection.CreateCommand();
-            cmd.CommandText = "Select terminId from tbusertermin where userId = @userId && isAccepted = 0";
+            cmd.CommandText = "call spGetAllOpenTerminOfUser(@userId)";
             cmd.Parameters.AddWithValue("@userId", HttpContext.Current.Session["id"]);
             mySqlConnection.Open();
             MySqlDataReader reader = cmd.ExecuteReader();
@@ -183,37 +167,15 @@ namespace calendarM133BusinessData
             mySqlConnection.Close();
             if (dataTable.Rows.Count == 0)
                 return new List<Termin>();
-            String s = "Select * From tbTermin where ";
+            List<Termin> allTermin = new List<Termin>();
             foreach (DataRow dr in dataTable.Rows)
             {
-                s += "terminId = " + dr["terminId"] + " || ";
-            }
-            s = s.Remove(s.ToCharArray().Length - 4);
-            MySqlCommand cmdTerminSelection = mySqlConnection.CreateCommand();
-            cmdTerminSelection.CommandText = s;
-            mySqlConnection.Open();
-            DataTable dataTable2 = new DataTable();
-            MySqlDataReader reader2 = cmdTerminSelection.ExecuteReader();
-            DataSet ds2 = new DataSet();
-            ds2.Tables.Add(dataTable2);
-            ds2.EnforceConstraints = false;
-            dataTable2.Load(reader2);
-            mySqlConnection.Close();
-            //SELECT * FROM tbtermin where terminId = 1 || terminId = 2
-            List<Termin> allTermin = new List<Termin>();
-            foreach (DataRow dr in dataTable2.Rows)
-            {
-                //try {
                 Termin t = new Termin();
                 t.id = int.Parse(dr["terminId"].ToString());
                 t.subject = dr["terminSubject"].ToString();
                 t.starTime = DateTime.Parse(dr["StartDate"].ToString());
                 t.endTime = DateTime.Parse(dr["EndDate"].ToString());
                 allTermin.Add(t);
-                //}
-                //catch(Exception ex){
-                //    //todo: add errorhandler            
-                //}
             }
 
             return allTermin;
@@ -255,7 +217,7 @@ namespace calendarM133BusinessData
             MySqlConnection mySqlConnection = new MySqlConnection();
             mySqlConnection.ConnectionString = "server=localhost;user id=root;persistsecurityinfo=True;database=dbTermin;port=3306;logging=True;allowuservariables=True";
             MySqlCommand cmd2 = mySqlConnection.CreateCommand();
-            cmd2.CommandText = "spUpdateUserTermin(@userId, terminId=@terminId)";
+            cmd2.CommandText = "call spUpdateUserTermin(@userId, terminId=@terminId)";
             cmd2.Parameters.AddWithValue("@userId", userId);
             cmd2.Parameters.AddWithValue("@terminId", terminId);
             mySqlConnection.Open();
